@@ -7,7 +7,7 @@ $id = $_GET['id'];
 $q = $conn->prepare("SELECT * FROM estudiantes  WHERE id = $id LIMIT 1");
 $q->execute();
 
-while($row = $q->fetchAll(PDO::FETCH_OBJ)) {
+while($row = $q->fetch(PDO::FETCH_OBJ)) {
     $data[] = $row;
 }
 

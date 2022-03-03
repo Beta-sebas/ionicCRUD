@@ -5,8 +5,8 @@ $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 $message = array();
 $year = $data['year'];
-$studentOne = $data['studenOne'];
-$studentTwo = $data['studenTwo'];
+$studentOne = $data['studentOne'];
+$studentTwo = $data['studentTwo'];
 
 //$q = mysqli_query($conn, "INSERT INTO estudiantes (year, studentOne, studentTwo) VALUES ('$year', '$studentOne', '$studentTwo')");
 try{

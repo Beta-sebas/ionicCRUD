@@ -5,13 +5,14 @@ $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 $message = array();
 $year = $data['year'];
-$studentOne = $data['studenOne'];
-$studentTwo = $data['studenTwo'];
+$studentOne = $data['studentOne'];
+$studentTwo = $data['studentTwo'];
 $id = $_GET['id'];
 
 //$q = mysqli_query($conn, "UPDATE estudiantes SET (year, studentOne, studentTwo) VALUES ('$year', '$studentOne', '$studentTwo') WHERE id = $id LIMIT 1");
 try{
-    $q = $conn->exec("UPDATE estudiantes SET (year, studentOne, studentTwo) VALUES ('$year', '$studentOne', '$studentTwo') WHERE id = $id LIMIT 1");
+    $q = $conn->prepare("UPDATE estudiantes SET year='$year', studentOne='$studentOne', studentTwo='$studentTwo' WHERE id = $id LIMIT 1");
+    $q->execute();
     } catch (Exception $e) {
         echo "Error :". $e->getMessage();
     }

@@ -5,8 +5,8 @@ $data = array();
 $q = $conn->prepare("SELECT * FROM estudiantes");
 $q->execute();
 
-while($row = $q->fetchAll(PDO::FETCH_OBJ)) {
-    $data[] = $row;
+while($row = $q->fetchAll(PDO::FETCH_ASSOC)) {
+    $data = $row;
 }
 
 /*while ($row = mysqli_fetch_object($q)) {

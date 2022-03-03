@@ -9,7 +9,8 @@ $id = $_GET['id'];
 
 //$q = mysqli_query($conn, "DELETE FROM estudiantes  WHERE id = $id LIMIT 1");
 try{
-    $q = $conn->exec("DELETE FROM estudiantes  WHERE id = $id LIMIT 1");
+    $q = $conn->prepare("DELETE FROM estudiantes  WHERE id = $id LIMIT 1");
+    $q->execute();
     } catch (Exception $e) {
         echo "Error :". $e->getMessage();
     }

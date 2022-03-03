@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Actualizar Estudiante</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-label position="floating">Semestre</ion-label>
+      <ion-input [(ngModel)]="year" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Codigo</ion-label>
+      <ion-input [(ngModel)]="studentOne" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Calificacion</ion-label>
+      <ion-input [(ngModel)]="studentTwo" type="text"></ion-input>
+    </ion-item>
+    <ion-row>
+        <ion-col>
+          <ion-button type="button" (click)="actualizarEstudiante()"
+            color="primary" shape="full" expand="block"> Actualizar Estudiante
+          </ion-button>
+        </ion-col>
+    </ion-row>
+  
+  </ion-list>
+</ion-content>
