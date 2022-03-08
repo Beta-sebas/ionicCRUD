@@ -1,74 +1,99 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  year: any;
-  studentOne: any;
-  studentTwo: any;
-  students: any=[];
-  constructor(
-    public _apiService: ApiService) { 
-      this.getEstudiantes();
+export class HomePage{
+    titulopub: any;
+    autores: any;
+    tipopub: any;
+    eventorevista: any;
+    doi: any;
+    anyopub: any;
+    referencias: any = [];
+    constructor(
+        public _apiService: ApiService) {
+        //this.getReferencias();
+
     }
+
+    ionViewDidEnter(){
+        this.getReferencias();
+        
+      }
 
     doRefresh(event) {
         console.log('Begin async operation');
-        this.getEstudiantes();
+        this.getReferencias();
         setTimeout(() => {
-          console.log('Async operation has ended');
-          event.target.complete();
+            console.log('Async operation has ended');
+            event.target.complete();
         }, 2000);
-      }
-
-  agregarEstudiante() {
-    console.log(this.year, this.studentOne, this.studentTwo)
-    let data = {
-      year: this.year,
-      studentOne: this.studentOne,
-      studentTwo: this.studentTwo
     }
-    for (let key in data) {
-        if (!data[key]) {
-            
-            alert("todos los datos son obligatorios")
+
+    agregarReferencia() {
+
+      
+        let data = {
+            titulopub: this.titulopub,
+            autores: this.autores,
+            tipopub: this.tipopub,
+            eventorevista: this.eventorevista,
+            doi: this.doi,
+            anyopub: this.anyopub
+        } 
+        
+        if(data.eventorevista==undefined){
+          data.eventorevista="";
+        }
+        if(data.doi==undefined){
+          data.doi="";
+        }
+        
+
+        if ((data.titulopub==undefined) || (data.autores==undefined) || (data.tipopub==undefined) || (data.anyopub==undefined)){
+            alert("todos los datos con * son obligatorios")
             return;
         }
-    }
-    this._apiService.agregarEstudiante(data).subscribe((res: any) => {
-      console.log("SUCCESS===", res);
-      this.year="";
-      this.studentOne="";
-      this.studentTwo="";
-      this.getEstudiantes();
-      
-    }, (error: any) => {
-      console.log("ERROR===", error);
-      
-    }
-    )
-  }
+        
+        this._apiService.agregarReferencia(data).subscribe((res: any) => {
+            console.log("EXITO AGREGANDO REFERENCIA", res);
+            this.titulopub= "";
+            this.autores= "";
+            this.tipopub= 0;
+            this.eventorevista= "";
+            this.doi= "";
+            this.anyopub="";
+            this.getReferencias();
 
-  getEstudiantes(){
-    this._apiService.getEstudiantes().subscribe((res:any) => {
-      console.log("SUCCESS ===",res);
-      this.students = res;
-    },(error:any) => {
-      console.log("ERROR ===",error);
-    })
-  }
+        }, (error: any) => {
+            console.log("ERROR AGREGANDO REFERENCIA", error);
 
-  deleteEstudiante(id){
-    this._apiService.deleteEstudiante(id).subscribe((res:any) => {
-      console.log("SUCCESS");
-      this.getEstudiantes();
-    },(error:any) => {
-      console.log("ERROR");
-    })
-  }
+        }
+        )
+    }
+
+    getReferencias() {
+        this._apiService.getReferencias().subscribe((res: any) => {
+            console.log("EXITO OBTENIENDO LISTA", res);
+            this.referencias = res;
+        }, (error: any) => {
+            console.log("ERROR OBTENIENDO LISTA", error);
+        })
+    }
+
+    deleteReferencia(idreferencia) {
+        console.log("Id por borrar: "+idreferencia);
+        this._apiService.deleteReferencia(idreferencia).subscribe((res: any) => {
+            console.log("EXITO ELIMINANDO REFERENCIA");
+            this.getReferencias();
+        }, (error: any) => {
+            console.log("ERROR ELIMINANDO REFERENCIA");
+        })
+    }
+
 
 }

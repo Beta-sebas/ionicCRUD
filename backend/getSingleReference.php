@@ -1,10 +1,14 @@
 <?php
 include "config.php";
 $data = array();
-$id = $_GET['id'];
+$idreferencia = $_GET['idreferencia'];
 
 //$q = mysqli_query($conn, "SELECT * FROM estudiantes");
-$q = $conn->prepare("SELECT * FROM estudiantes  WHERE id = $id LIMIT 1");
+
+
+
+//$q = $conn->prepare("SELECT * FROM estudiantes  WHERE id = $id LIMIT 1");
+$q = $conn->prepare("SELECT * FROM referencias  WHERE idreferencia = $idreferencia LIMIT 1");
 $q->execute();
 
 while($row = $q->fetch(PDO::FETCH_OBJ)) {

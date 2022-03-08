@@ -2,7 +2,10 @@
 include "config.php";
 $data = array();
 //$q = mysqli_query($conn, "SELECT * FROM estudiantes");
-$q = $conn->prepare("SELECT * FROM estudiantes");
+
+//$q = $conn->prepare("SELECT * FROM estudiantes");
+$q = $conn->prepare("SELECT * FROM referencias");
+
 $q->execute();
 
 while($row = $q->fetchAll(PDO::FETCH_ASSOC)) {

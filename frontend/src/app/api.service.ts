@@ -15,23 +15,24 @@ export class ApiService {
     this.headers.append('Access-Control-Allow', '*');
    }
 
-  agregarEstudiante(data){
+  agregarReferencia(data){
     return this.http.post('http://localhost/ionicCRUD/backend/create.php',data);
+    debugger
   }
 
-  getEstudiantes(){
-    return this.http.get('http://localhost/ionicCRUD/backend/getStudents.php');
+  getReferencias(){
+    return this.http.get('http://localhost/ionicCRUD/backend/getReferences.php');
   }
 
-  getEstudiante(id){
-    return this.http.get('http://localhost/ionicCRUD/backend/getSingleStudent.php?id='+id);
+  getReferencia(idreferencia){
+    return this.http.get('http://localhost/ionicCRUD/backend/getSingleReference.php?idreferencia='+idreferencia);
   }
 
-  deleteEstudiante(id){
-    return this.http.delete('http://localhost/ionicCRUD/backend/delete.php?id='+id);
+  deleteReferencia(idreferencia){
+    return this.http.delete('http://localhost/ionicCRUD/backend/delete.php?idreferencia='+idreferencia);
   }
 
-  actualizarEstudiante(id,data){
-    return this.http.put('http://localhost/ionicCRUD/backend/updateStudents.php?id='+id,data);
+  actualizarReferencia(idreferencia,data){
+    return this.http.put('http://localhost/ionicCRUD/backend/updateReference.php?idreferencia='+idreferencia,data);
   }
 }

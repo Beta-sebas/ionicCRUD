@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-update-student',
@@ -8,48 +9,64 @@ import { ApiService } from '../api.service';
   styleUrls: ['./update-student.page.scss'],
 })
 export class UpdateStudentPage implements OnInit {
-  id: any;
-  year: any;
-  studentOne: any;
-  studentTwo: any;
+  idreferencia: any;
+  titulopub: any;
+  autores: any;
+  tipopub: any;
+  eventorevista: any;
+  doi: any;
+  anyopub: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private _apiService : ApiService
+    private _apiService : ApiService,
+    private location: Location
   ) { 
     this.route.params.subscribe((param:any) => {
-      this.id=param.id;
-      console.log(this.id);
-      this.getEstudiante(this.id);
+      this.idreferencia=param.id;
+      console.log("Id por actualizar: "+this.idreferencia);
+      this.getReferencia(this.idreferencia);
     })
   }
 
   ngOnInit() {
   }
 
-  getEstudiante(id){
-    this._apiService.getEstudiante(id).subscribe((res:any) => {
-      console.log("SUCCESS",res);
-      let student = res[0];
-      this.year=student.year;
-      this.studentOne=student.studentOne;
-      this.studentTwo=student.studentTwo;
+  getReferencia(idreferencia){
+    this._apiService.getReferencia(idreferencia).subscribe((res:any) => {
+      console.log("EXITO OBTENIENDO DATOS A MODIFICAR",res);
+      let referencia = res[0];
+      this.titulopub=referencia.titulopub;
+      this.autores= referencia.autores;
+      this.tipopub= referencia.tipopub;
+      this.eventorevista= referencia.eventorevista;
+      this.doi= referencia.doi;
+      this.anyopub= referencia.anyopub;
+
+    
     },(err:any) => {
-      console.log("ERROR",err);
+      console.log("ERROR OBTENIENDO DATOS A MODIFICAR",err);
     })
   }
 
-  actualizarEstudiante(){
+  actualizarReferencia(){
     let data = {
-      year: this.year,
-      studentOne: this.studentOne,
-      studentTwo: this.studentTwo
+      titulopub: this.titulopub,
+      autores: this.autores,
+      tipopub: this.tipopub,
+      eventorevista: this.eventorevista,
+      doi: this.doi,
+      anyopub: this.anyopub
     }
-
-    this._apiService.actualizarEstudiante(this.id,data).subscribe((res:any) => {
+    if ((data.titulopub=="") || (data.autores=="") || (data.tipopub==undefined) || (data.anyopub==undefined)){
+      alert("todos los datos con * son obligatorios")
+      return;
+    }
+    this._apiService.actualizarReferencia(this.idreferencia,data).subscribe((res:any) => {
       console.log("SUCCESS",res);
       this.router.navigateByUrl('/home');
+      //this.location.back();
     },(err:any) => {
       console.log("ERROR",err);
     })

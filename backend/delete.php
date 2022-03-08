@@ -5,11 +5,12 @@ $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 $message = array();
 
-$id = $_GET['id'];
+$idreferencia = $_GET['idreferencia'];
 
 //$q = mysqli_query($conn, "DELETE FROM estudiantes  WHERE id = $id LIMIT 1");
 try{
-    $q = $conn->prepare("DELETE FROM estudiantes  WHERE id = $id LIMIT 1");
+    //$q = $conn->prepare("DELETE FROM estudiantes  WHERE id = $id LIMIT 1");
+    $q = $conn->prepare("DELETE FROM referencias  WHERE idreferencia = $idreferencia LIMIT 1");
     $q->execute();
     } catch (Exception $e) {
         echo "Error :". $e->getMessage();

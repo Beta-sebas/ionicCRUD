@@ -1,49 +1,78 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Ionic-PHP CRUD </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title> Gestor referencias bibliográficas </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-  <ion-list lines="full">
-    <ion-item>
-      <ion-label position="floating">Semestre</ion-label>
-      <ion-input [(ngModel)]="year" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Codigo</ion-label>
-      <ion-input [(ngModel)]="studentOne" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Calificacion</ion-label>
-      <ion-input [(ngModel)]="studentTwo" type="text"></ion-input>
-    </ion-item>
-    <ion-row>
-        <ion-col>
-          <ion-button type="button" (click)="agregarEstudiante()"
-            color="primary" shape="full" expand="block"> Agregar estudiante
-          </ion-button>
-        </ion-col>
-    </ion-row>
-  
-  </ion-list>
+    <ion-list lines="full">
 
-  <ion-list>
-    <ion-list-header>
-      Lista de Estudiantes
-    </ion-list-header>
-    <ion-item lines="inset" *ngFor="let student of students">
-      <ion-label>
-        <h5>{{student.year}} - ({{student.studentOne}},{{student.studentTwo}})</h5>
-      </ion-label>
-      <div class="item-note">
-        <ion-icon name="create" style="zoom: 2.0;" [routerLink]="['/update-student/',student.id]" routerLinkActive="active"></ion-icon>
-        <ion-icon name="trash" style="zoom: 2.0;" (click)="deleteEstudiante(student.id)"></ion-icon>
-      </div>
-    </ion-item>
-  </ion-list>
+        <ion-label style="margin-left: 15px;" position="floating">Los campos con <span style="color: red;">*</span> son requeridos</ion-label>
 
+        <ion-item>
+            <ion-label position="floating">Título de la publicación <span style="color: red;">*</span></ion-label>
+            <ion-input [(ngModel)]="titulopub" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Lista de autores separada por comas<span style="color: red;">*</span></ion-label>
+            <ion-input [(ngModel)]="autores" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Tipo de publicación<span style="color: red;">*</span></ion-label>
+            <ion-select [(ngModel)]="tipopub" placeholder="Escoja una opción">
+                <ion-select-option value=1>Artículo de revista</ion-select-option>
+                <ion-select-option value=2>Artículo de evento</ion-select-option>
+                <ion-select-option value=3>Otro</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Nombre de evento</ion-label>
+            <ion-input [(ngModel)]="eventorevista" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Codigo identificador</ion-label>
+            <ion-input [(ngModel)]="doi" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Año de publicación<span style="color: red;">*</span></ion-label>
+            <ion-input [(ngModel)]="anyopub" type="number"></ion-input>
+        </ion-item>
+
+        <ion-row>
+            <ion-col>
+                <ion-button type="button" (click)="agregarReferencia()" color="primary" shape="full" expand="block">
+                    Agregar Referencia
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+
+
+
+
+    <ion-list>
+        <ion-list-header> Lista de Referencias </ion-list-header>
+        <ion-item lines="inset" *ngFor="let referencia of referencias">
+            <ion-label>
+                <h5>
+                    {{referencia.titulopub}}
+                </h5>
+            </ion-label>
+            <div class="item-note">
+                <ion-icon name="eye" style="zoom: 2.0" [routerLink]="['/read-reference/',referencia.idreferencia]"
+                    routerLinkActive="active"></ion-icon>
+                <ion-icon name="create" style="zoom: 2.0" [routerLink]="['/update-student/',referencia.idreferencia]"
+                    routerLinkActive="active"></ion-icon>
+                <ion-icon name="trash" style="zoom: 2.0" (click)="deleteReferencia(referencia.idreferencia)"></ion-icon>
+            </div>
+        </ion-item>
+    </ion-list>
 </ion-content>

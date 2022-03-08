@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Datos de Referencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="inset" *ngFor="let referencia of referencias">
+    <ion-item>
+      <h5 style="color: rgb(65, 65, 196)">Titulo:</h5>
+      <br />
+      <h5>&nbsp;{{referencia.titulopub}}</h5>
+    </ion-item>
+
+    <ion-item>
+      <h5 style="color: rgb(65, 65, 196)">Autores:</h5>
+      <br />
+      <h5>&nbsp;{{referencia.autores}}</h5>
+    </ion-item>
+
+    <ion-item>
+      <h5 style="color: rgb(65, 65, 196)">Tipo:</h5>
+      <br />
+      <h5>&nbsp;{{referencia.tipopub}}</h5>
+    </ion-item>
+
+    <ion-item>
+      <h5 style="color: rgb(65, 65, 196)">Evento Revista:</h5>
+      <br />
+      <h5>&nbsp;{{referencia.eventorevista}}</h5>
+    </ion-item>
+    <ion-item>
+      <h5 style="color: rgb(65, 65, 196)">Identificador:</h5>
+      <br />
+      <h5>&nbsp;{{referencia.doi}}</h5>
+    </ion-item>
+
+    <ion-item>
+      <h5 style="color: rgb(65, 65, 196)">Año:</h5>
+      <br />
+      <h5>&nbsp;{{referencia.anyopub}}</h5>
+    </ion-item>
+  </ion-list>
+
+  <ion-row>
+    <ion-col>
+        <ion-button type="button" (click)="volver()" color="primary" shape="full" expand="block">
+            Volver
+        </ion-button>
+    </ion-col>
+</ion-row>
+</ion-content>

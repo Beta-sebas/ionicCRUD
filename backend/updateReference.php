@@ -4,9 +4,12 @@ include "config.php";
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 $message = array();
+
 // $year = $data['year'];
 // $studentOne = $data['studentOne'];
 // $studentTwo = $data['studentTwo'];
+
+$idreferencia = $_GET['idreferencia'];
 
 $titulopub = $data['titulopub'];
 $autores = $data['autores'];
@@ -15,19 +18,16 @@ $eventorevista = $data['eventorevista'];
 $doi = $data['doi'];
 $anyopub = $data['anyopub'];
 
-// if (($eventorevista==null)){
-//     $eventorevista="";
-// }
-// if (($doi==null)){
-//     $doi="";
-// }
+
 
 try{
-//$q = $conn->exec("INSERT INTO estudiantes (year, studentOne, studentTwo) VALUES ('$year', '$studentOne', '$studentTwo')");
-$q = $conn->exec("INSERT INTO referencias (titulopub, autores, tipopub, eventorevista, doi, anyopub) VALUES ('$titulopub', '$autores', '$tipopub', '$eventorevista', '$doi', '$anyopub')");
-} catch (Exception $e) {
-    echo "Error :". $e->getMessage();
-}
+    //$q = $conn->prepare("UPDATE estudiantes SET year='$year', studentOne='$studentOne', studentTwo='$studentTwo' WHERE id = $id LIMIT 1");
+    $q = $conn->prepare("UPDATE referencias SET titulopub='$titulopub', autores='$autores', tipopub='$tipopub', eventorevista='$eventorevista', doi='$doi', anyopub='$anyopub' WHERE idreferencia = $idreferencia LIMIT 1");
+
+    $q->execute();
+    } catch (Exception $e) {
+        echo "Error :". $e->getMessage();
+    }
 if ($q) {
     http_response_code(201);
     $message['status'] = "Success";
@@ -37,5 +37,6 @@ if ($q) {
 }
 
 echo json_encode($message);
+
 
 ?>
