@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Location } from "@angular/common";
-
-
+var logueado;
 @Component({
     selector: 'app-read-reference',
     templateUrl: './read-reference.page.html',
@@ -32,6 +31,13 @@ export class ReadReferencePage implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    ionViewDidEnter(){
+        logueado = JSON.parse(localStorage.getItem('login'));
+        if (!logueado) {
+           this.router.navigateByUrl('/login'); 
+        }   
     }
 
     getReferencia(idreferencia) {

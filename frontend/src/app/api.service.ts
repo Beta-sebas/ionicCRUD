@@ -35,4 +35,8 @@ export class ApiService {
   actualizarReferencia(idreferencia,data){
     return this.http.put('http://localhost/ionicCRUD/backend/updateReference.php?idreferencia='+idreferencia,data);
   }
+
+  login(data){
+    return this.http.post('http://localhost/ionicCRUD/backend/login.php',data);
+  }
 }

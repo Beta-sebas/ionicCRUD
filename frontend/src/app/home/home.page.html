@@ -1,6 +1,13 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-title> Gestor referencias bibliográficas </ion-title>
+        <div class="toolbar">
+            <div class="header">
+                <h4>Bienvenido: <span id="usuario"></span></h4>   
+            </div>
+            <div class="contenedor-btn">
+                <button class="btn-cerrarSesion" (click)="cerrarSesion()">Cerrar Sesión</button>  
+            </div>
+        </div>
     </ion-toolbar>
 </ion-header>
 
@@ -8,43 +15,45 @@
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+    <br>
+    <div class="titulo"> Gestor referencias bibliográficas </div><br>
     <ion-list lines="full">
 
         <ion-label style="margin-left: 15px;" position="floating">Los campos con <span style="color: red;">*</span> son requeridos</ion-label>
 
-        <ion-item>
+        <div class="item-form">
             <ion-label position="floating">Título de la publicación <span style="color: red;">*</span></ion-label>
             <ion-input [(ngModel)]="titulopub" type="text"></ion-input>
-        </ion-item>
+        </div>
 
-        <ion-item>
+        <div class="item-form">
             <ion-label position="floating">Lista de autores separada por comas<span style="color: red;">*</span></ion-label>
             <ion-input [(ngModel)]="autores" type="text"></ion-input>
-        </ion-item>
+        </div>
 
-        <ion-item>
+        <div class="item-form">
             <ion-label position="floating">Tipo de publicación<span style="color: red;">*</span></ion-label>
             <ion-select [(ngModel)]="tipopub" placeholder="Escoja una opción">
                 <ion-select-option value=1>Artículo de revista</ion-select-option>
                 <ion-select-option value=2>Artículo de evento</ion-select-option>
                 <ion-select-option value=3>Otro</ion-select-option>
             </ion-select>
-        </ion-item>
+        </div>
 
-        <ion-item>
+        <div class="item-form">
             <ion-label position="floating">Nombre de evento</ion-label>
             <ion-input [(ngModel)]="eventorevista" type="text"></ion-input>
-        </ion-item>
+        </div>
 
-        <ion-item>
+        <div class="item-form">
             <ion-label position="floating">Codigo identificador</ion-label>
             <ion-input [(ngModel)]="doi" type="text"></ion-input>
-        </ion-item>
+        </div>
 
-        <ion-item>
+        <div class="item-form">
             <ion-label position="floating">Año de publicación<span style="color: red;">*</span></ion-label>
             <ion-input [(ngModel)]="anyopub" type="number"></ion-input>
-        </ion-item>
+        </div>
 
         <ion-row>
             <ion-col>
@@ -69,7 +78,7 @@
             <div class="item-note">
                 <ion-icon name="eye" style="zoom: 2.0" [routerLink]="['/read-reference/',referencia.idreferencia]"
                     routerLinkActive="active"></ion-icon>
-                <ion-icon name="create" style="zoom: 2.0" [routerLink]="['/update-student/',referencia.idreferencia]"
+                <ion-icon name="create" style="zoom: 2.0" [routerLink]="['/update-reference/',referencia.idreferencia]"
                     routerLinkActive="active"></ion-icon>
                 <ion-icon name="trash" style="zoom: 2.0" (click)="deleteReferencia(referencia.idreferencia)"></ion-icon>
             </div>

@@ -6,11 +6,11 @@ var logueado;
 
 
 @Component({
-  selector: 'app-update-student',
-  templateUrl: './update-student.page.html',
-  styleUrls: ['./update-student.page.scss'],
+  selector: 'app-update-reference',
+  templateUrl: './update-reference.page.html',
+  styleUrls: ['./update-reference.page.scss'],
 })
-export class UpdateStudentPage implements OnInit {
+export class UpdateReferencePage implements OnInit {
   idreferencia: any;
   titulopub: any;
   autores: any;
@@ -81,6 +81,9 @@ export class UpdateStudentPage implements OnInit {
     })
 
   }
+  volver() {
+    this.location.back();
+}
 
 
 }

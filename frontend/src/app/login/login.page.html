@@ -1,0 +1,15 @@
+<ion-content>
+    <div class="header">
+        <h3>Bienvenido</h3>
+        <h1>Por favor inicia sesión </h1>
+    </div>
+    <div class="form">     
+      <ion-input [(ngModel)]="usuario" type="text" placeholder="Usuario"></ion-input>        
+      <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
+    </div>
+    <div class="button" (click)="login()">
+      Login <ion-icon name="chevron-forward-outline"></ion-icon>            
+    </div>
+    
+    
+</ion-content>

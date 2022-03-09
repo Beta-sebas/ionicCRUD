@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'read-reference/:id',
     loadChildren: () => import('./read-reference/read-reference.module').then( m => m.ReadReferencePageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'update-reference/:id',
+    loadChildren: () => import('./update-reference/update-reference.module').then( m => m.UpdateReferencePageModule)
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Actualizar Referencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+
+    <ion-label style="margin-left: 15px;" position="floating">Los campos con <span style="color: red;">*</span> son requeridos</ion-label>
+        
+    <div class="item-form">
+      <ion-label position="floating">Título de la publicación <span style="color: red;">*</span></ion-label>
+      <ion-input [(ngModel)]="titulopub" type="text"></ion-input>
+  </div>
+
+  <div class="item-form">
+      <ion-label position="floating">Lista de autores separada por comas<span style="color: red;">*</span></ion-label>
+      <ion-input [(ngModel)]="autores" type="text"></ion-input>
+  </div>
+
+  <div class="item-form">
+      <ion-label position="floating">Tipo de publicación<span style="color: red;">*</span></ion-label>
+      <ion-select [(ngModel)]="tipopub" placeholder="Escoja una opción">
+          <ion-select-option value=1>Artículo de revista</ion-select-option>
+          <ion-select-option value=2>Artículo de evento</ion-select-option>
+          <ion-select-option value=3>Otro</ion-select-option>
+      </ion-select>
+  </div>
+
+  <div class="item-form">
+      <ion-label position="floating">Nombre de evento</ion-label>
+      <ion-input [(ngModel)]="eventorevista" type="text"></ion-input>
+  </div>
+
+  <div class="item-form">
+      <ion-label position="floating">Codigo identificador</ion-label>
+      <ion-input [(ngModel)]="doi" type="text"></ion-input>
+  </div>
+
+  <div class="item-form">
+      <ion-label position="floating">Año de publicación<span style="color: red;">*</span></ion-label>
+      <ion-input [(ngModel)]="anyopub" type="number"></ion-input>
+  </div>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="button" (click)="volver()" color="primary" shape="full" expand="block">
+            Volver
+        </ion-button>
+    </ion-col>
+        <ion-col>
+          <ion-button type="button" (click)="actualizarReferencia()"
+            color="primary" shape="full" expand="block"> Actualizar Referencia
+          </ion-button>
+        </ion-col>
+        
+    </ion-row>
+  
+  </ion-list>
+
+
+
+</ion-content>

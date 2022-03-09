@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
+var logueado;
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
@@ -15,15 +16,26 @@ export class HomePage{
     anyopub: any;
     referencias: any = [];
     constructor(
-        public _apiService: ApiService) {
+        public _apiService: ApiService,
+        private router: Router) {
         //this.getReferencias();
 
     }
 
     ionViewDidEnter(){
+       
+        logueado = JSON.parse(localStorage.getItem('login'));
+
+        if (!logueado) {
+           this.router.navigateByUrl('/login'); 
+        }
+        let usuario = document.getElementById('usuario');
+        let user = JSON.parse(localStorage.getItem('user'));
+        console.log(user);
+        usuario.innerHTML = user;
         this.getReferencias();
         
-      }
+    }
 
     doRefresh(event) {
         console.log('Begin async operation');
@@ -54,7 +66,7 @@ export class HomePage{
         }
         
 
-        if ((data.titulopub==undefined) || (data.autores==undefined) || (data.tipopub==undefined) || (data.anyopub==undefined)){
+        if ((data.titulopub==undefined) || (data.autores==undefined) || (data.tipopub==undefined) || (data.anyopub==undefined)||(data.titulopub=="") || (data.autores=="") || (data.tipopub=="") || (data.anyopub=="")){
             alert("todos los datos con * son obligatorios")
             return;
         }
@@ -78,6 +90,7 @@ export class HomePage{
 
     getReferencias() {
         this._apiService.getReferencias().subscribe((res: any) => {
+        
             console.log("EXITO OBTENIENDO LISTA", res);
             this.referencias = res;
         }, (error: any) => {
@@ -95,5 +108,12 @@ export class HomePage{
         })
     }
 
+    cerrarSesion(){
+        logueado = false;
+        let str = JSON.stringify(logueado);
+        localStorage.setItem("login", str);
+        localStorage.setItem("user", "");
+        this.router.navigateByUrl('/login'); 
+    }
 
 }
